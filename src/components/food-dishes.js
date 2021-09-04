@@ -13,14 +13,17 @@ const FoodDishes = () => {
     useEffect(()=>{
         axios
             .get("https://foodish-api.herokuapp.com/api/")
-            .then(res => setDishes(res.data.image)) 
+            .then(res => setDishes(res.data.image))
+            .catch(function (error) {
+                document.querySelector("#changeButton").remove()
+            })
     },[]);
 
     console.log(dish);
     return (
-        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+        <div id="container" style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
             <h1 style={{color:"white"}}>Foods</h1>
-            <button style={{marginBottom:"12px", padding:"8px", borderRadius:"4px", }} onClick= {reloadPage}>Random Food Dish</button>
+            <button id="changeButton" style={{marginBottom:"12px", padding:"8px", borderRadius:"4px", }} onClick= {reloadPage}>Random Food Dish</button>
             <img style={{maxWidth:"1000px", maxHeight:"800px"}} src={dish} alt={dish}></img>
         </div>
     );
